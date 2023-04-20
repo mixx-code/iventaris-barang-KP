@@ -11,7 +11,6 @@ const MainApp = () => {
       <div className="">
         <Outlet />
       </div>
-      <div className="mx-auto z-10">footer</div>
     </div>
   );
 };

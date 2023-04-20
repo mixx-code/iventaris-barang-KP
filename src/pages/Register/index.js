@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const Register = () => {
+  const Api = "https://iventaris-barang-api.cyclic.app/";
   const [nama, setNama] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +16,7 @@ const Register = () => {
   const registerUser = async (nama, email, konfirmasiPassword) => {
     try {
       const response = await axios.post(
-        "https://zany-rose-butterfly-coat.cyclic.app/v1/iventaris/registrasi" ||
+        `${Api}/v1/iventaris/registrasi` ||
           "http://localhost:4000/v1/iventaris/registrasi",
         {
           nama,

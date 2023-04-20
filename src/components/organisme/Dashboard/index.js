@@ -3,7 +3,9 @@ import { Button } from "../../atoms";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { CardItem, TabelBarangKeluar, TabelBarangMasuk } from "../../molecules";
+import Footer from "../Footer";
 const Dashboard = () => {
+  const Api = "https://iventaris-barang-api.cyclic.app/";
   //state
   const [counter, setCounter] = useState(1);
 
@@ -18,7 +20,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        `https://zany-rose-butterfly-coat.cyclic.app/v1/iventaris/items?page=${halaman}&perPage=6` ||
+        `${Api}/v1/iventaris/items?page=${halaman}&perPage=6` ||
           `http://localhost:4000/v1/iventaris/items?page=${halaman}&perPage=6`
       )
       .then((response) => {
@@ -38,7 +40,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="w-full bg-custom-putih flex flex-col  h-screen mt-14 ml-80 ">
+    <div className="w-full bg-custom-putih flex flex-col  h-max mt-14 ml-80 ">
       <h1 className="text-3xl ml-24 mt-9 font-semibold">Barang</h1>
       <div className=" ml-24 -mt-10 grid grid-cols-3 gap-2 relative">
         {dataItem.map((item) => {
@@ -72,6 +74,7 @@ const Dashboard = () => {
         <TabelBarangMasuk />
         <TabelBarangKeluar />
       </div>
+      <Footer className="w-full bg-gray-400 flex text-white h-max  mt-32 py-6 justify-center items-center  " />
     </div>
   );
 };

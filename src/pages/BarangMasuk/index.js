@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const BarangMasuk = () => {
+  const Api = "https://iventaris-barang-api.cyclic.app/";
   const navigate = useNavigate();
   const { id } = useParams();
   const [jumlahItemMasuk, setjumlahItemMasuk] = useState(0);
@@ -19,7 +20,7 @@ const BarangMasuk = () => {
   useEffect(() => {
     axios
       .get(
-        `https://zany-rose-butterfly-coat.cyclic.app/v1/iventaris/item/${id}` ||
+        `${Api}/v1/iventaris/item/${id}` ||
           `http://localhost:4000/v1/iventaris/item/${id}`
       )
       .then((response) => {
@@ -35,7 +36,7 @@ const BarangMasuk = () => {
     event.preventDefault();
     axios
       .put(
-        `https://zany-rose-butterfly-coat.cyclic.app/v1/iventaris/item/${id}` ||
+        `${Api}/v1/iventaris/item/${id}` ||
           `http://localhost:4000/v1/iventaris/item/${id}`,
         {
           nama_item: barang.nama_item,
@@ -51,7 +52,7 @@ const BarangMasuk = () => {
 
     axios
       .post(
-        `https://zany-rose-butterfly-coat.cyclic.app/v1/iventaris/item-masuk` ||
+        `${Api}/v1/iventaris/item-masuk` ||
           "http://localhost:4000/v1/iventaris/item-masuk",
         {
           nama_item_masuk: barang.nama_item,
@@ -113,7 +114,7 @@ const BarangMasuk = () => {
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              Tambah
+              Submit
             </button>
           </div>
         </form>

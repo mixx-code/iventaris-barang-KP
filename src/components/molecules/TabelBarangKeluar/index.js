@@ -4,6 +4,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 const TabelBarangKeluar = () => {
+  const Api = "https://iventaris-barang-api.cyclic.app/";
   const [counter, setCounter] = useState(1);
   const [halaman, setHalaman] = useState([]);
   const [barangKeluar, setBarangKeluar] = useState([]);
@@ -17,7 +18,7 @@ const TabelBarangKeluar = () => {
   useEffect(() => {
     axios
       .get(
-        `https://zany-rose-butterfly-coat.cyclic.app/v1/iventaris/items-keluar?sort=updatedAt:desc&page=${page}&perPage=7` ||
+        `${Api}/v1/iventaris/items-keluar?sort=updatedAt:desc&page=${page}&perPage=7` ||
           `http://localhost:4000/v1/iventaris/items-keluar?sort=updatedAt:desc&page=${page}&perPage=7`
       )
       .then((response) => {
@@ -32,7 +33,7 @@ const TabelBarangKeluar = () => {
   useEffect(() => {
     axios
       .get(
-        `https://zany-rose-butterfly-coat.cyclic.app/v1/iventaris/items-keluar/` ||
+        `${Api}/v1/iventaris/items-keluar/` ||
           `http://localhost:4000/v1/iventaris/items-keluar`
       )
       .then((response) => {

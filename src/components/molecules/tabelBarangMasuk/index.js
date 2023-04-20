@@ -8,6 +8,7 @@ import {
   faFileExcel,
 } from "@fortawesome/free-solid-svg-icons";
 const TabelBarangMasuk = (props) => {
+  const Api = "https://iventaris-barang-api.cyclic.app/";
   const [counter, setCounter] = useState(1);
   const [halaman, setHalaman] = useState([]);
   const [barangMasuk, setBarangMasuk] = useState([]);
@@ -23,7 +24,7 @@ const TabelBarangMasuk = (props) => {
   useEffect(() => {
     axios
       .get(
-        `https://zany-rose-butterfly-coat.cyclic.app/v1/iventaris/items-masuk?sort=updatedAt:desc&page=${page}&perPage=7` ||
+        `${Api}/v1/iventaris/items-masuk?sort=updatedAt:desc&page=${page}&perPage=7` ||
           `http://localhost:4000/v1/iventaris/items-masuk?sort=updatedAt:desc&page=${page}&perPage=7`
       )
       .then((response) => {
@@ -38,7 +39,7 @@ const TabelBarangMasuk = (props) => {
   useEffect(() => {
     axios
       .get(
-        `https://zany-rose-butterfly-coat.cyclic.app/v1/iventaris/items-masuk/` ||
+        `${Api}/v1/iventaris/items-masuk/` ||
           `http://localhost:4000/v1/iventaris/items-masuk`
       )
       .then((response) => {

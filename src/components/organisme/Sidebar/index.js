@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 const Sidebar = () => {
+  const Api = "https://iventaris-barang-api.cyclic.app/";
   const [data, setData] = useState({});
   const navigate = useNavigate();
   const dataUser = JSON.parse(localStorage.getItem("dataUser"));
@@ -9,7 +10,7 @@ const Sidebar = () => {
   useEffect(() => {
     axios
       .get(
-        `https://zany-rose-butterfly-coat.cyclic.app/v1/iventaris/user/${userId}` ||
+        `${Api}/v1/iventaris/user/${userId}` ||
           `http://localhost:4000/v1/iventaris/user/${userId}`
       )
       .then((response) => {
@@ -37,7 +38,7 @@ const Sidebar = () => {
         </li>
         <li className="text-xl text-gray-700  mt-10">
           <NavLink
-            to="/tambah-barang"
+            to="/home/tambahBarang"
             relative="path"
             activeClassName="text-blue-500"
           >

@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Button, Input } from "../../components/atoms";
+import { Button, Input, IsLoading } from "../../components/atoms";
 
 const Login = () => {
+  const Api = "https://iventaris-barang-api.cyclic.app/";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const handleLogin = async (event) => {
     event.preventDefault();
 
     try {
+      setIsLoading(true); // Menampilkan indikator loading
       const response = await axios.post(
-        "https://zany-rose-butterfly-coat.cyclic.app/v1/iventaris/login" ||
+        `${Api}/v1/iventaris/login` ||
           "http://localhost:4000/v1/iventaris/login",
         {
           email,
@@ -23,14 +26,16 @@ const Login = () => {
       const data = response.data;
 
       // Login berhasil
+
       sessionStorage.setItem("isLogin", true);
       localStorage.setItem("dataUser", JSON.stringify(data.user));
       console.log(data.message);
       console.log(data.user);
       console.log(sessionStorage.getItem("isLogin"));
       console.log(localStorage.getItem("dataUser"));
-      // tambahkan kode untuk pindah halaman ke halaman home atau redirect ke halaman lain
-      navigate("/home");
+
+      // Redirect ke halaman /home
+      window.location.href = "/home";
     } catch (error) {
       setErrorMessage(error.response.data.message);
     }
@@ -55,9 +60,9 @@ const Login = () => {
         />
         {errorMessage && <div>{errorMessage}</div>}
         <Button
-          label="Login"
+          label={isLoading === true ? <IsLoading /> : "Login"}
           onClick={handleLogin}
-          className="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline justify-center items-center"
         />
       </div>
     </div>

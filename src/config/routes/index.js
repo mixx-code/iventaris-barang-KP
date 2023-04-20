@@ -9,6 +9,7 @@ import {
   BarangMasuk,
 } from "../../pages";
 import { Dashboard } from "../../components/organisme";
+import TambahBarang from "../../pages/TambahBarang";
 const isLogin = sessionStorage.getItem("isLogin");
 const Routes = () => {
   const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const Routes = () => {
             {
               path: "/home/barangKeluar/:id",
               element: isLogin === "true" ? <BarangKeluar /> : <Login />,
+            },
+            {
+              path: "/home/tambahBarang/",
+              element: isLogin === "true" ? <TambahBarang /> : <Login />,
             },
           ],
         },
