@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button, Input, IsLoading } from "../../components/atoms";
 const TambahBarang = () => {
   const Api = "https://iventaris-barang-api.cyclic.app/";
   const navigate = useNavigate();
   const [jumlahItemMasuk, setjumlahItemMasuk] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const [barang, setbarang] = useState("");
 
   console.log("jumlah masuk: ", jumlahItemMasuk);
@@ -14,6 +16,7 @@ const TambahBarang = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsLoading(true);
     axios
       .post(
         `${Api}/v1/iventaris/item/` ||
@@ -27,6 +30,7 @@ const TambahBarang = () => {
         console.log(response.data);
       })
       .catch((error) => {
+        setIsLoading(false);
         console.log(error);
       });
 
@@ -45,6 +49,8 @@ const TambahBarang = () => {
         navigate("/home");
       })
       .catch((error) => {
+        setIsLoading(false);
+        window.alert("Item Gagal ditambahkan!");
         console.log(error);
       });
   };
@@ -54,44 +60,31 @@ const TambahBarang = () => {
         <h2 className="text-lg font-medium mb-4">Tambah Barang</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="nama-item"
-            >
-              Nama Item
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="nama-item"
+            <Input
+              label="Nama Item"
               type="text"
-              placeholder="Masukkan nama item"
               value={barang}
               onChange={(event) => setbarang(event.target.value)}
+              placeholder="Masukkan nama item"
+              required
             />
           </div>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="jumlah-item"
-            >
-              Jumlah Item
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="jumlah-item"
+            <Input
+              label="Jumlah Item"
               type="number"
-              placeholder="Masukkan jumlah item"
               value={jumlahItemMasuk}
               onChange={(event) => setjumlahItemMasuk(event.target.value)}
+              placeholder="Masukkan Jumlah Item"
+              required
             />
           </div>
           <div className="flex items-center justify-center">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            <Button
+              label={isLoading === true ? <IsLoading /> : "Submit"}
               type="submit"
-            >
-              Submit
-            </button>
+              className=" flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline justify-center items-center"
+            />
           </div>
         </form>
       </div>

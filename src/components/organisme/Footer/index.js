@@ -4,7 +4,8 @@ const Footer = ({ ...rest }) => {
   return (
     <div {...rest}>
       <div>
-        &copy; 2023 Rizki febriansyah - <span className="text-blue-600">@</span>
+        &copy; 2023 Rizki febriansyah ❤️{" "}
+        <span className="text-blue-600">@</span>
       </div>
       <a
         href="https://www.instagram.com/iki_0011/"

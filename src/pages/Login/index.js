@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { Button, Input, IsLoading } from "../../components/atoms";
 
 const Login = () => {
@@ -9,7 +8,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -37,6 +35,7 @@ const Login = () => {
       // Redirect ke halaman /home
       window.location.href = "/home";
     } catch (error) {
+      setIsLoading(false);
       setErrorMessage(error.response.data.message);
     }
   };

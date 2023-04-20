@@ -2,7 +2,7 @@ import React from "react";
 
 const IsLoading = () => {
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex mx-auto justify-center items-center">
       <div role="status">
         <svg
           aria-hidden="true"
@@ -20,7 +20,6 @@ const IsLoading = () => {
             fill="currentFill"
           />
         </svg>
-        <span className="sr-only">Loading...</span>
       </div>
     </div>
   );
