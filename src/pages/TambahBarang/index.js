@@ -9,11 +9,6 @@ const TambahBarang = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [barang, setbarang] = useState("");
 
-  console.log("jumlah masuk: ", jumlahItemMasuk);
-  console.log("jumlah lama: ", barang.total_stok);
-  console.log("data barang : ", barang);
-  console.log("ini barang masuk : ", barang.nama_item);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     setIsLoading(true);
@@ -27,7 +22,7 @@ const TambahBarang = () => {
         }
       )
       .then((response) => {
-        console.log(response.data);
+        console.log("berhasil ditambahkan");
       })
       .catch((error) => {
         setIsLoading(false);

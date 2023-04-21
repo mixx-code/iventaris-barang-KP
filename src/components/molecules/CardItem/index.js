@@ -24,12 +24,12 @@ function CardItem(props) {
       <div className="flex justify-around mt-5">
         <Button
           label="Barang Masuk"
-          className="p-1 w-36 rounded-lg bg-custom-hijau-muda text-sm border-custom-hijau-tua border-2 text-white"
+          className="p-1 w-36 rounded-lg bg-custom-hijau-muda hover:bg-green-600 text-sm border-custom-hijau-tua hover:border-green-900 border-2 text-white"
           onClick={handleClickBarangMasuk}
         />
         <Button
           label="Barang Keluar"
-          className="p-1 w-36 rounded-lg bg-custom-merah-muda text-sm border-custom-merah-tua border-2 text-white"
+          className="p-1 w-36 rounded-lg bg-custom-merah-muda hover:bg-red-600 text-sm border-custom-merah-tua hover:border-red-900 border-2 text-white"
           onClick={() => navigate(`/home/barangKeluar/${id}`)}
         />
       </div>

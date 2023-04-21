@@ -12,7 +12,7 @@ const Register = () => {
   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-
+  console.log(isPasswordMatch);
   const registerUser = async (nama, email, konfirmasiPassword) => {
     try {
       const response = await axios.post(
@@ -46,6 +46,9 @@ const Register = () => {
       registerUser(nama, email, konfirmasiPassword);
     }
   };
+  const handleKembali = () => {
+    navigate("/home");
+  };
   return (
     <div className="flex items-center justify-center h-screen bg-slate-800">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 lg:w-80">
@@ -75,11 +78,18 @@ const Register = () => {
           onChange={(event) => setKonfirmasiPassword(event.target.value)}
         />
         {errorMessage && <div>{errorMessage}</div>}
-        <Button
-          label="Daftar"
-          onClick={handleRegister}
-          className="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        />
+        <div className="grid gap-y-3">
+          <Button
+            label="Daftar"
+            onClick={handleRegister}
+            className="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          />
+          <Button
+            label="Kembali"
+            onClick={handleKembali}
+            className="flex-1 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          />
+        </div>
       </div>
     </div>
   );

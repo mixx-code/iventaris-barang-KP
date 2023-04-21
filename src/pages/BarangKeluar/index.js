@@ -9,13 +9,7 @@ const BarangKeluar = () => {
   const [jumlahKeluar, setJumlahKeluar] = useState();
   const [barang, setbarang] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log("jumlah keluar: ", jumlahKeluar);
-  console.log("jumlah lama: ", barang.total_stok);
   const jumlahStokBaru = parseInt(barang.total_stok) - parseInt(jumlahKeluar);
-  console.log("jumlah baru : ", jumlahStokBaru);
-  console.log("data barang : ", barang);
-  console.log("ini barang keluar : ", barang.nama_item);
 
   useEffect(() => {
     axios

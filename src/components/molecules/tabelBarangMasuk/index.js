@@ -2,24 +2,15 @@ import React, { useEffect, useState } from "react";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRight,
-  faArrowLeft,
-  faFileExcel,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 const TabelBarangMasuk = (props) => {
   const Api = "https://iventaris-barang-api.cyclic.app/";
   const [counter, setCounter] = useState(1);
   const [halaman, setHalaman] = useState([]);
   const [barangMasuk, setBarangMasuk] = useState([]);
   const [allData, setAllData] = useState([]);
-  console.log("barang masuk", barangMasuk);
-  console.log("semua barang masuk", allData);
-
-  console.log("halaman", halaman);
 
   let totalPage = Math.ceil(halaman.total_data / halaman.per_page);
-  // console.log(page);
   let page = counter;
   useEffect(() => {
     axios
@@ -44,9 +35,7 @@ const TabelBarangMasuk = (props) => {
       )
       .then((response) => {
         const responAPI = response.data;
-        const dataLength = responAPI.data.length;
         setAllData(responAPI.data);
-        console.log(`Jumlah data: ${dataLength}`);
       })
       .catch(function (error) {
         console.log(error);
@@ -76,7 +65,7 @@ const TabelBarangMasuk = (props) => {
               className="min-w-full text-center text-sm font-light "
             >
               <thead className="border-b font-medium dark:border-neutral-500">
-                <tr className="bg-green-700">
+                <tr className="bg-green-700 text-white">
                   <th scope="col" className="px-6 py-4">
                     Nama Barang
                   </th>
@@ -161,13 +150,13 @@ const TabelBarangMasuk = (props) => {
             </table>
             <div className="flex absolute right-0 -bottom-7">
               <div
-                className="bg-custom-abu-tua p-1 px-2 mr-5 rounded-lg text-white cursor-pointer"
+                className="bg-custom-abu-tua hover:bg-gray-700  border-gray-600 hover:border-gray-800 p-1 px-2 mr-5 rounded-lg text-white cursor-pointer"
                 onClick={previous}
               >
                 <FontAwesomeIcon icon={faArrowLeft} />
               </div>
               <div
-                className="bg-custom-hijau-muda p-1 px-2 rounded-lg text-white cursor-pointer"
+                className="bg-custom-hijau-muda hover:bg-green-600 border-custom-hijau-tua hover:border-green-900 p-1 px-2 rounded-lg text-white cursor-pointer"
                 onClick={next}
               >
                 <FontAwesomeIcon icon={faArrowRight} />
@@ -177,11 +166,11 @@ const TabelBarangMasuk = (props) => {
             <div className="flex absolute right-0 top-0 ">
               <ReactHTMLTableToExcel
                 id="test-table-xls-button"
-                className="bg-custom-hijau-muda p-1 px-2 rounded-lg text-white cursor-pointer"
+                className="bg-custom-hijau-muda hover:bg-green-600 p-1 px-2 rounded-lg text-white cursor-pointer"
                 table="myTabelMasuk"
                 filename="data-barang-masuk"
                 sheet="Sheet1"
-                buttonText="save"
+                buttonText="Cetak ke excel"
               />
             </div>
           </div>

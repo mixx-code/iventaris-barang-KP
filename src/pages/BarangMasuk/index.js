@@ -11,13 +11,8 @@ const BarangMasuk = () => {
   const [barang, setbarang] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log("jumlah masuk: ", jumlahItemMasuk);
-  console.log("jumlah lama: ", barang.total_stok);
   const jumlahStokBaru =
     parseInt(barang.total_stok) + parseInt(jumlahItemMasuk);
-  console.log("jumlah baru : ", jumlahStokBaru);
-  console.log("data barang : ", barang);
-  console.log("ini barang masuk : ", barang.nama_item);
 
   useEffect(() => {
     axios

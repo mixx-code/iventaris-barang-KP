@@ -22,7 +22,6 @@ const Sidebar = () => {
   }, [userId]);
   function handleLogout() {
     sessionStorage.setItem("isLogin", false);
-    // tambahkan kode untuk pindah halaman ke halaman home atau redirect ke halaman lain
     navigate("/login");
   }
   return (

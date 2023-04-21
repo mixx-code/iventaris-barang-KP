@@ -21,8 +21,8 @@ const Dashboard = () => {
     setIsLoading(true); // set loading menjadi true saat permintaan data dimulai
     axios
       .get(
-        `${Api}/v1/iventaris/items?page=${halaman}&perPage=6` ||
-          `http://localhost:4000/v1/iventaris/items?page=${halaman}&perPage=6`
+        `${Api}/v1/iventaris/items?page=${halaman}&perPage=10` ||
+          `http://localhost:4000/v1/iventaris/items?page=${halaman}&perPage=10`
       )
       .then((response) => {
         const responseAPI = response.data;
@@ -49,13 +49,13 @@ const Dashboard = () => {
       <h1 className="text-3xl ml-24 mt-9 font-semibold z-10">Barang</h1>
 
       {isLoading ? (
-        <div className="ml-24 -mt-10 grid grid-cols-3 gap-2 relative">
+        <div className="mx-auto -mt-10 grid grid-cols-2 gap-x-40 gap-y-5 relative">
+          <CardItem />
           <CardItem />
         </div>
       ) : (
-        <div className=" ml-24 -mt-10 grid grid-cols-3 gap-2 relative">
+        <div className=" mx-auto -mt-10 grid grid-cols-2 gap-x-40 gap-y-5 relative">
           {dataItem.map((item) => {
-            console.log(item._id);
             return (
               <CardItem
                 key={item._id}
@@ -65,10 +65,10 @@ const Dashboard = () => {
               />
             );
           })}
-          <div className="flex  absolute -bottom-16 right-28">
+          <div className="flex  absolute -bottom-16 right-0">
             <Button
               label="Seblumnya"
-              className="p-1 w-36 rounded-lg bg-custom-abu-tua text-sm border-gray-600 border-2 text-white"
+              className="p-1 w-36 rounded-lg bg-custom-abu-tua hover:bg-gray-700 text-sm border-gray-600 hover:border-gray-800 border-2 text-white"
               onClick={previous}
             />
             <p className="text-xl px-6">
@@ -76,13 +76,13 @@ const Dashboard = () => {
             </p>
             <Button
               label="Selanjutnya"
-              className="p-1 w-36 rounded-lg bg-custom-hijau-muda text-sm border-custom-hijau-tua border-2 text-white"
+              className="p-1 w-36 rounded-lg bg-custom-hijau-muda hover:bg-green-600 text-sm border-custom-hijau-tua hover:border-green-900 border-2 text-white"
               onClick={next}
             />
           </div>
         </div>
       )}
-      <div className="flex justify-center gap-10 mr-56">
+      <div className=" flex justify-center gap-10 mr-28">
         <TabelBarangMasuk />
         <TabelBarangKeluar />
       </div>

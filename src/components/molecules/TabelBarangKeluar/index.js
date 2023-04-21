@@ -9,11 +9,7 @@ const TabelBarangKeluar = () => {
   const [halaman, setHalaman] = useState([]);
   const [barangKeluar, setBarangKeluar] = useState([]);
   const [allData, setAllData] = useState([]);
-  console.log("barang Keluar", barangKeluar);
-  console.log("semua barang Keluar", allData);
-
   let totalPage = Math.ceil(halaman.total_data / halaman.per_page);
-  // console.log(page);
   let page = counter;
   useEffect(() => {
     axios
@@ -38,9 +34,7 @@ const TabelBarangKeluar = () => {
       )
       .then((response) => {
         const responAPI = response.data;
-        const dataLength = responAPI.data.length;
         setAllData(responAPI.data);
-        console.log(`Jumlah data: ${dataLength}`);
       })
       .catch(function (error) {
         console.log(error);
@@ -70,7 +64,7 @@ const TabelBarangKeluar = () => {
               className="min-w-full text-center text-sm font-light "
             >
               <thead className="border-b font-medium dark:border-neutral-500">
-                <tr className="bg-blue-700">
+                <tr className="bg-blue-700 text-white">
                   <th scope="col" className="px-6 py-4">
                     Nama Barang
                   </th>
@@ -155,13 +149,13 @@ const TabelBarangKeluar = () => {
             </table>
             <div className="flex absolute right-0 -bottom-7">
               <div
-                className="bg-custom-abu-tua p-1 px-2 mr-5 rounded-lg text-white cursor-pointer"
+                className="bg-custom-abu-tua hover:bg-gray-700  border-gray-600 hover:border-gray-800 p-1 px-2 mr-5 rounded-lg text-white cursor-pointer"
                 onClick={previous}
               >
                 <FontAwesomeIcon icon={faArrowLeft} />
               </div>
               <div
-                className="bg-custom-hijau-muda p-1 px-2 rounded-lg text-white cursor-pointer"
+                className="bg-custom-hijau-muda hover:bg-green-600 border-custom-hijau-tua hover:border-green-900a p-1 px-2 rounded-lg text-white cursor-pointer"
                 onClick={next}
               >
                 <FontAwesomeIcon icon={faArrowRight} />
@@ -171,11 +165,11 @@ const TabelBarangKeluar = () => {
             <div className="flex absolute right-0 top-0 ">
               <ReactHTMLTableToExcel
                 id="test-table-xls-button"
-                className="bg-custom-hijau-muda p-1 px-2 rounded-lg text-white cursor-pointer"
+                className="bg-custom-hijau-muda hover:bg-green-600 p-1 px-2 rounded-lg text-white cursor-pointer"
                 table="mytablekeluar"
                 filename="data-barang-Keluar"
                 sheet="Sheet1"
-                buttonText="save"
+                buttonText="Cetak ke excel"
               />
             </div>
           </div>
