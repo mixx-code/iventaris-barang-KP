@@ -1,4 +1,5 @@
 import Input from "./Input";
 import Button from "./Button";
 import IsLoading from "./Loading";
-export { Input, Button, IsLoading };
+import Select from "./Select";
+export { Input, Button, IsLoading, Select };

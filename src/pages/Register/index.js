@@ -1,26 +1,33 @@
 import React from "react";
-import { Button, Input } from "../../components/atoms";
+import { Button, Input, IsLoading } from "../../components/atoms";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Register = () => {
   const Api = "https://iventaris-barang-api.cyclic.app/";
+  const [isLoading, setIsLoading] = useState(false);
   const [nama, setNama] = useState("");
+  const [role, setRole] = useState("admin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [konfirmasiPassword, setKonfirmasiPassword] = useState("");
   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  console.log("role :", role);
   const navigate = useNavigate();
   console.log(isPasswordMatch);
   const registerUser = async (nama, email, konfirmasiPassword) => {
     try {
+      setIsLoading(true);
       const response = await axios.post(
         `${Api}/v1/iventaris/registrasi` ||
           "http://localhost:4000/v1/iventaris/registrasi",
         {
           nama,
           email,
+          role,
           password: konfirmasiPassword,
         }
       );
@@ -65,6 +72,24 @@ const Register = () => {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
+        <div className="mb-4 relative">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Role
+          </label>
+          <select
+            data-te-select-init
+            value={role}
+            onChange={(event) => setRole(event.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          >
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+          </select>
+          <FontAwesomeIcon
+            icon={faCaretDown}
+            className="absolute right-4 top-10"
+          />
+        </div>
         <Input
           label="Password"
           type="password"
@@ -80,9 +105,9 @@ const Register = () => {
         {errorMessage && <div>{errorMessage}</div>}
         <div className="grid gap-y-3">
           <Button
-            label="Daftar"
+            label={isLoading === true ? <IsLoading /> : "Daftar"}
             onClick={handleRegister}
-            className="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline justify-center items-center"
           />
           <Button
             label="Kembali"

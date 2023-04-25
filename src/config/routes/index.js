@@ -7,6 +7,9 @@ import {
   MainApp,
   BarangKeluar,
   BarangMasuk,
+  ListBarang,
+  ListAkun,
+  EditAkun,
 } from "../../pages";
 import { Dashboard } from "../../components/organisme";
 import TambahBarang from "../../pages/TambahBarang";
@@ -36,6 +39,18 @@ const Routes = () => {
             {
               path: "/home/tambahBarang/",
               element: isLogin === "true" ? <TambahBarang /> : <Login />,
+            },
+            {
+              path: "/home/listBarang/",
+              element: isLogin === "true" ? <ListBarang /> : <Login />,
+            },
+            {
+              path: "/home/listAkun/",
+              element: isLogin === "true" ? <ListAkun /> : <Login />,
+            },
+            {
+              path: "/home/editAkun/:id",
+              element: isLogin === "true" ? <EditAkun /> : <Login />,
             },
           ],
         },
