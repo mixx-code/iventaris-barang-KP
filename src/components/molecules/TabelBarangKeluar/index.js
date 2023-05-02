@@ -55,7 +55,7 @@ const TabelBarangKeluar = () => {
   );
   return (
     <div className="flex flex-col w-1/3 ml-24 mt-32 relative">
-      <h1 className="font-semibold text-3xl">Tabel Barang Keluar</h1>
+      <h1 className="font-semibold text-xl">Tabel Barang Keluar</h1>
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <div className="overflow-hidden">
