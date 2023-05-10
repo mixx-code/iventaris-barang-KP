@@ -6,7 +6,7 @@ import axios from "axios";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Register = () => {
-  const Api = "https://iventaris-barang-api.cyclic.app/";
+  const Api = "https://iventaris-barang-api.cyclic.app";
   const [isLoading, setIsLoading] = useState(false);
   const [nama, setNama] = useState("");
   const [role, setRole] = useState("admin");
@@ -15,7 +15,6 @@ const Register = () => {
   const [konfirmasiPassword, setKonfirmasiPassword] = useState("");
   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  console.log("role :", role);
   const navigate = useNavigate();
   console.log(isPasswordMatch);
   const registerUser = async (nama, email, konfirmasiPassword) => {
@@ -32,14 +31,16 @@ const Register = () => {
         }
       );
       const data = response.data;
-
+      console.log(response);
       // Login berhasil
       console.log(data.message);
       console.log(data.user);
       // tambahkan kode untuk pindah halaman ke halaman home atau redirect ke halaman lain
       navigate("/login");
     } catch (error) {
+      setIsLoading(false);
       setErrorMessage(error.response.data.message);
+      console.log(errorMessage);
     }
   };
 
@@ -99,10 +100,11 @@ const Register = () => {
         <Input
           label="Konfirmasi Password"
           type="password"
+          minLength={8}
           value={konfirmasiPassword}
           onChange={(event) => setKonfirmasiPassword(event.target.value)}
         />
-        {errorMessage && <div>{errorMessage}</div>}
+        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
         <div className="grid gap-y-3">
           <Button
             label={isLoading === true ? <IsLoading /> : "Daftar"}

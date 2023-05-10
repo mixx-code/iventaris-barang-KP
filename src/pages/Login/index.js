@@ -54,6 +54,7 @@ const Login = () => {
         <Input
           label="Password"
           type="password"
+          minLength={8}
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />

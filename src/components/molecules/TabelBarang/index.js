@@ -4,15 +4,31 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button } from "../../atoms";
 
-const TabelBarang = () => {
+const TabelBarang = (props) => {
   const Api = "https://iventaris-barang-api.cyclic.app/";
   const [counter, setCounter] = useState(1);
   const [halaman, setHalaman] = useState([]);
   const [barang, setBarang] = useState([]);
+  const [data, setData] = useState({});
+  const dataUser = JSON.parse(localStorage.getItem("dataUser"));
+  const userId = dataUser.id;
   console.log("list barang : ", barang);
   console.log("halaman list barang : ", halaman);
   let totalPage = Math.ceil(halaman.total_data / halaman.per_page);
   let page = counter;
+  useEffect(() => {
+    axios
+      .get(
+        `${Api}/v1/iventaris/user/${userId}` ||
+          `http://localhost:4000/v1/iventaris/user/${userId}`
+      )
+      .then((response) => {
+        setData(response.data.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [userId]);
   useEffect(() => {
     axios
       .get(
@@ -54,9 +70,13 @@ const TabelBarang = () => {
                   >
                     Stok
                   </th>
-                  <th scope="col" className="px-6 py-4">
-                    Handle
-                  </th>
+                  {data.role === "admin" ? (
+                    <th scope="col" className="px-6 py-4">
+                      Handle
+                    </th>
+                  ) : (
+                    ""
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -73,23 +93,27 @@ const TabelBarang = () => {
                       <td className="whitespace-nowrap border-r px-6  dark:border-neutral-500">
                         {item.total_stok}
                       </td>
-                      <td className="flex whitespace-nowrap py-4 items-center justify-center">
-                        <Button
-                          label="hapus"
-                          className="w-14 rounded-lg p-1 bg-red-600 hover:bg-custom-merah-muda text-sm border-red-900 hover:border-custom-merah-tua border-2 text-white"
-                          onClick={() => {
-                            if (
-                              window.confirm(
-                                "apa anda mau menghapus barang ini?"
-                              )
-                            ) {
-                              axios.delete(`${Api}/v1/iventaris/item/${id}`);
-                              alert("barang berhasil di hapus.");
-                              window.location.reload();
-                            }
-                          }}
-                        />
-                      </td>
+                      {data.role === "admin" ? (
+                        <td className="flex whitespace-nowrap py-4 items-center justify-center">
+                          <Button
+                            label="hapus"
+                            className="w-14 rounded-lg p-1 bg-red-600 hover:bg-custom-merah-muda text-sm border-red-900 hover:border-custom-merah-tua border-2 text-white"
+                            onClick={() => {
+                              if (
+                                window.confirm(
+                                  "apa anda mau menghapus barang ini?"
+                                )
+                              ) {
+                                axios.delete(`${Api}/v1/iventaris/item/${id}`);
+                                alert("barang berhasil di hapus.");
+                                window.location.reload();
+                              }
+                            }}
+                          />
+                        </td>
+                      ) : (
+                        ""
+                      )}
                     </tr>
                   );
                 })}

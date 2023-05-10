@@ -84,6 +84,15 @@ const Sidebar = () => {
               Dashboard
             </NavLink>
           </li>
+          <li className="text-xl text-gray-700  mt-10">
+            <NavLink
+              to={{ pathname: "/home/listBarang", state: { role: data.role } }}
+              relative="path"
+              activeClassName="text-blue-500"
+            >
+              List Barang
+            </NavLink>
+          </li>
           <li className="text-xl text-red-500  mt-10 ">
             <button onClick={handleLogout}>Logout</button>
           </li>
