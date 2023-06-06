@@ -11,6 +11,8 @@ const BarangKeluar = () => {
   const [isLoading, setIsLoading] = useState(false);
   const jumlahStokBaru = parseInt(barang.total_stok) - parseInt(jumlahKeluar);
   const idItem = id;
+  const dataUser = JSON.parse(localStorage.getItem("dataUser"));
+  const userId = dataUser.id;
   console.log("id item", idItem);
   useEffect(() => {
     axios
@@ -37,6 +39,7 @@ const BarangKeluar = () => {
         {
           nama_item: barang.nama_item,
           total_stok: parseInt(jumlahStokBaru),
+          id_user: userId,
         }
       )
       .then((response) => {
@@ -59,7 +62,7 @@ const BarangKeluar = () => {
       .then((response) => {
         console.log(response.data);
         window.alert("Item berhasil diKeluarkan!");
-        // navigate("/home");
+        navigate("/home");
       })
       .catch((error) => {
         console.log(error);

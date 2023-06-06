@@ -8,10 +8,13 @@ const TambahBarang = () => {
   const [jumlahItemMasuk, setjumlahItemMasuk] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [barang, setbarang] = useState("");
-
+  const dataUser = JSON.parse(localStorage.getItem("dataUser"));
+  const userId = dataUser.id;
+  console.log(userId);
   const handleSubmit = (event) => {
     event.preventDefault();
     setIsLoading(true);
+
     axios
       .post(
         `${Api}/v1/iventaris/item/` ||
@@ -19,6 +22,7 @@ const TambahBarang = () => {
         {
           nama_item: barang,
           total_stok: parseInt(jumlahItemMasuk),
+          id_user: userId,
         }
       )
       .then((response) => {

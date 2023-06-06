@@ -4,13 +4,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button, Input, IsLoading } from "../../components/atoms";
 
 const BarangMasuk = () => {
-  const Api = "https://iventaris-barang-api.cyclic.app/";
+  const Api = "https://iventaris-barang-api.cyclic.app";
   const navigate = useNavigate();
   const { id } = useParams();
   const [jumlahItemMasuk, setjumlahItemMasuk] = useState();
   const [barang, setbarang] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-
+  const dataUser = JSON.parse(localStorage.getItem("dataUser"));
+  const userId = dataUser.id;
   const jumlahStokBaru =
     parseInt(barang.total_stok) + parseInt(jumlahItemMasuk);
 
@@ -39,6 +40,7 @@ const BarangMasuk = () => {
         {
           nama_item: barang.nama_item,
           total_stok: parseInt(jumlahStokBaru),
+          id_user: userId,
         }
       )
       .then((response) => {
