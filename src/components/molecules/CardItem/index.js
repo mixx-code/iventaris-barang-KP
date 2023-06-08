@@ -11,13 +11,14 @@ function CardItem(props) {
   };
 
   return (
-    <div className="mt-20 w-96 h-32 bg-custom-gray p-4 rounded-lg">
+    <div className="mt-20 w-100 h-auto bg-custom-gray p-4 rounded-lg">
       <div className="flex justify-between">
         <h1 className="font-semibold ml-4 mb-4 text-xl uppercase">
           {nama_item}
         </h1>
-        <h1 className="mr-4 mb-4 text-sm">
-          Stok <span className="font-medium text-xl">{total_stok}</span>Pcs
+        <h1 className="flex items-center mr-4 mb-4 text-sm">
+          Stok <span className="font-medium text-xl mx-1">{total_stok}</span>{" "}
+          Pcs
         </h1>
       </div>
       <hr className="border-black w-11/12 mx-auto"></hr>

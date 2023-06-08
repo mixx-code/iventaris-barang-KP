@@ -9,6 +9,7 @@ const TabelBarang = (props) => {
   const [counter, setCounter] = useState(1);
   const [halaman, setHalaman] = useState([]);
   const [barang, setBarang] = useState([]);
+
   const [data, setData] = useState({});
   const dataUser = JSON.parse(localStorage.getItem("dataUser"));
   const userId = dataUser.id;
@@ -121,11 +122,14 @@ const TabelBarang = (props) => {
             </table>
             <div className="flex absolute right-0 -bottom-7">
               <div
-                className="bg-custom-abu-tua hover:bg-gray-700  border-gray-600 hover:border-gray-800 p-1 px-2 mr-5 rounded-lg text-white cursor-pointer"
+                className="bg-custom-abu-tua hover:bg-gray-700  border-gray-600 hover:border-gray-800 p-1 px-2  rounded-lg text-white cursor-pointer"
                 onClick={previous}
               >
                 <FontAwesomeIcon icon={faArrowLeft} />
               </div>
+              <p className="text-xl mx-3">
+                {halaman.current_page} / {totalPage}
+              </p>
               <div
                 className="bg-custom-hijau-muda hover:bg-green-600 border-custom-hijau-tua hover:border-green-900a p-1 px-2 rounded-lg text-white cursor-pointer"
                 onClick={next}
